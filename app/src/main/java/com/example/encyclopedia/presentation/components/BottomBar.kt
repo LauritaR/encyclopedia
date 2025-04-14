@@ -8,10 +8,11 @@ import androidx.compose.ui.tooling.preview.Preview
 
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.encyclopedia.presentation.theme.Main60
 
 @Composable
-fun BottomBar(navHostController: NavHostController){
-   NavigationBar(containerColor = MaterialTheme.colorScheme.primary) {
+fun BottomBar(){
+   NavigationBar(containerColor = Main60) {
 
    }
 }
@@ -20,5 +21,5 @@ fun BottomBar(navHostController: NavHostController){
 @Composable
 fun BottomBarPrev(){
     val navController = rememberNavController()
-    BottomBar(navController)
+    BottomBar()
 }
