@@ -4,7 +4,6 @@ package com.example.encyclopedia.presentation.navigation
 import android.content.Context
 import android.util.Log
 import androidx.compose.runtime.Composable
-import androidx.lifecycle.viewmodel.compose.viewModel
 
 import androidx.navigation.NavHostController
 
