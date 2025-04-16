@@ -4,16 +4,11 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.encyclopedia.presentation.theme.EncyclopediaTheme
+import androidx.room.Room
+import com.example.encyclopedia.data.local.QuizDatabase
+import com.example.encyclopedia.data.repository.OfflineQuestionsRepository
 
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
@@ -21,8 +16,18 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+            val database = Room.databaseBuilder(
+                applicationContext,
+                QuizDatabase::class.java,
+                "quiz_database"
+            ).build()
+
             val windowClass = calculateWindowSizeClass(this)
-            EncyclopediaApp(windowClass= windowClass.widthSizeClass)
+            val questionsRepository = OfflineQuestionsRepository(database)
+
+            EncyclopediaApp(windowClass= windowClass.widthSizeClass,
+                questionsRepository = questionsRepository,
+                appContext = applicationContext)
             }
         }
     }

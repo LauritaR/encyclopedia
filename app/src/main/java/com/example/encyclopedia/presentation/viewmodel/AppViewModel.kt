@@ -8,7 +8,6 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
-import org.w3c.dom.Text
 
 class AppViewModel : ViewModel() {
     private val _isSearching = MutableStateFlow(false)
