@@ -22,6 +22,7 @@ import com.example.encyclopedia.presentation.screens.LoginScreen
 import com.example.encyclopedia.presentation.screens.QuizScreen
 import com.example.encyclopedia.presentation.screens.RegistrationScreen
 import com.example.encyclopedia.presentation.screens.ResultScreen
+import com.example.encyclopedia.presentation.screens.SplashScreen
 import com.example.encyclopedia.presentation.screens.UserResultsScreen
 import com.example.encyclopedia.presentation.viewmodel.QuizViewModel
 import com.example.encyclopedia.presentation.viewmodel.UserViewModel

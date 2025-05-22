@@ -93,6 +93,6 @@ dependencies {
     implementation ("com.airbnb.android:lottie-compose:6.1.0")
 
 
-
+    implementation ("androidx.core:core-splashscreen:1.0.1")
 
 }

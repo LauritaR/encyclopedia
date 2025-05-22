@@ -43,7 +43,7 @@ fun UserResultsScreen(userId: Int, quizResultDao: QuizResultDao) {
         Text("Your results")
         Box(modifier = Modifier
             .fillMaxWidth()
-            .height(100.dp)) {
+            .height(90.dp)) {
         }
         Box(
             modifier = Modifier
@@ -73,7 +73,7 @@ fun UserResultsScreen(userId: Int, quizResultDao: QuizResultDao) {
 
         Box(modifier = Modifier
             .fillMaxWidth()
-            .height(56.dp)) {
+            .height(90.dp)) {
         }
     }
 }

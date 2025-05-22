@@ -13,9 +13,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -25,13 +27,18 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.encyclopedia.R
+import com.example.encyclopedia.presentation.theme.Main30
 import com.example.encyclopedia.presentation.theme.Main60
 @Composable
 fun BottomBar(navController: NavController) {
     val currentBackStackEntry = navController.currentBackStackEntryAsState().value
     val currentRoute = currentBackStackEntry?.destination?.route ?: ""
+
     fun extractSimpleCategory(route: String): String? {
         return when {
+            route.startsWith("quizScreen/") -> {
+                route.removePrefix("quizScreen/")
+            }
             route.contains("Category:Mammal_common_names") -> "Mammals"
             route.contains("Category:Bird_common_names") -> "Birds"
             route.contains("Category:Reptile_common_names") -> "Reptiles"
@@ -40,10 +47,13 @@ fun BottomBar(navController: NavController) {
         }
     }
 
-    val currentCategory = remember(currentRoute) {
-        extractSimpleCategory(currentRoute)
-    }
 
+    val currentCategory = extractSimpleCategory(currentRoute)
+
+    LaunchedEffect(currentRoute) {
+        println("Current Route: $currentRoute")
+        println("Current Category: $currentCategory")
+    }
     NavigationBar(containerColor = Main60) {
 
         IconButton(
@@ -83,13 +93,18 @@ fun BottomBar(navController: NavController) {
         ) {
             val selected = isSelected(category)
 
-            val backgroundColor = if (selected) MaterialTheme.colorScheme.primary.copy(alpha = 0.2f)
-            else MaterialTheme.colorScheme.surface
-
+            val backgroundColor = if (selected) Main30.copy(alpha = 0.3f) else Main60
+            val iconSize = sizeDp.dp
+            val totalSize = (sizeDp + if (selected) 10 else 0).dp
             Box(
                 modifier = Modifier
-                    .weight(0.5f)
-                    .size((sizeDp + if (selected) 10 else 0).dp) // slight size bump if selected
+                    .weight(1f)
+                    .size(totalSize)
+                    .shadow(
+                        elevation = if(selected) 8.dp else 0.dp,
+                        shape = CircleShape,
+                        clip = false
+                    )
                     .background(
                         color = backgroundColor,
                         shape = CircleShape
@@ -100,8 +115,10 @@ fun BottomBar(navController: NavController) {
                 Icon(
                     painter = painterResource(iconRes),
                     contentDescription = null,
-                    tint = if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier.size(sizeDp.dp)
+                        .then(
+                            if (selected) Modifier.shadow(4.dp, CircleShape) else Modifier
+                        )
                 )
             }
         }
