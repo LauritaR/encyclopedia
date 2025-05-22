@@ -50,6 +50,7 @@ fun Homescreen(onNavigateToInfo:(String)->Unit,
                onNavigateToQuiz: (String)->Unit,
                onNavigateToLogin:()->Unit,
                onNavigateToRegister:() -> Unit,
+               onNavigateToUserResults:()->Unit,
                userViewModel: UserViewModel
 ) {
     val user  = userViewModel.currentUser
@@ -225,6 +226,7 @@ fun Homescreen(onNavigateToInfo:(String)->Unit,
 //                    Text(text = "Login")
 //                }
                 if(user!=null){
+                    AnimatedOutlinedButton("Your previous results", onClick = onNavigateToUserResults)
                     AnimatedOutlinedButton("Log out", onClick = {userViewModel.logout()})
                 }else{
                 AnimatedOutlinedButton("Login", onClick = onNavigateToLogin)

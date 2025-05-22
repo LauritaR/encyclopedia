@@ -57,6 +57,10 @@ fun NavGraph(navController: NavHostController=rememberNavController(),
                 onNavigateToRegister = {
                     navController.navigate("registerScreen")
                 },
+                onNavigateToUserResults = {
+                    val userId = userViewModel.loggedInUserId.value
+                    navController.navigate("userResultsScreen/$userId")
+                },
                 userViewModel=userViewModel
 
             )
@@ -94,7 +98,12 @@ fun NavGraph(navController: NavHostController=rememberNavController(),
             val userId = backStackEntry.arguments?.getString("userId")?.toIntOrNull() ?: return@composable
             UserResultsScreen(
                 userId = userId,
-                quizResultDao = quizDatabase.quizResultDao()
+                quizResultDao = quizDatabase.quizResultDao(),
+                onNavigateToHome = {
+                    navController.navigate("homescreen") {
+                        popUpTo("homescreen") { inclusive = true }
+                    }
+                },
             )
         }
 

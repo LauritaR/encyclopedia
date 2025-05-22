@@ -49,7 +49,11 @@ fun EncyclopediaApp(
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
-    val shouldShowNav = currentRoute != "homescreen" && currentRoute != "results"
+    val shouldShowNav = currentRoute != "homescreen" &&
+            currentRoute != "resultScreen/{score}/{totalQuestions}" &&
+            currentRoute != "loginScreen" &&
+            currentRoute != "registerScreen" &&
+            currentRoute != "userResultsScreen/{userId}"
 
     EncyclopediaTheme {
         Surface(
@@ -64,7 +68,7 @@ fun EncyclopediaApp(
               },
                 bottomBar = {
                     if (navType == NavType.BOTTOM_NAV && shouldShowNav) {
-                        BottomBar(navController = navController)//TODO bottom bar turi dingti pirmame ir results puslapyje
+                        BottomBar(navController = navController)
                     }
                 }
             ) { innerPadding ->
