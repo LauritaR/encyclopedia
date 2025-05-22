@@ -53,7 +53,9 @@ class QuizViewModel(private val questionsRepository: QuestionsRepository):ViewMo
             questionsRepository.saveUserAnswer(newAnswer)
         }
     }
-
+    fun resetCurrentQuestionIndex(){
+        _currentQuestionIndex.value =0
+    }
     fun goToNextQuestion() {
         if (_currentQuestionIndex.value < _questions.value.size - 1) {
             _currentQuestionIndex.value += 1

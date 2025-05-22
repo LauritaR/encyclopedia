@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.example.encyclopedia.presentation.theme.Accent10
 import com.example.encyclopedia.presentation.theme.Accent5
 import com.example.encyclopedia.presentation.theme.Main60
 
@@ -32,7 +33,7 @@ fun NavigationSection(
             Button(onClick = onPrevious,
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Main60,
-                    contentColor = Accent5
+                    contentColor = Accent10
                 )) {
                 Text("Previous")
             }
@@ -42,7 +43,7 @@ fun NavigationSection(
             Button (onClick = onSubmit,
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Main60,
-                    contentColor = Accent5
+                    contentColor = Accent10
                 )
             ) {
                 Text("Submit")
@@ -51,7 +52,7 @@ fun NavigationSection(
             Button(onClick = onNext,
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Main60,
-                    contentColor = Accent5
+                    contentColor = Accent10
                 )) {
                 Text("Next")
             }

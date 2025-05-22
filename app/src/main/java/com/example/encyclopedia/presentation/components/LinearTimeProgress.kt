@@ -18,12 +18,12 @@ import kotlinx.coroutines.delay
 
 @Composable
 fun LinearTimeProgress(modifier: Modifier = Modifier, onTimeElapsed:(Long)->Unit) {
-    val remainingTime = remember { mutableStateOf(60) } // Remaining time in seconds
-    val progress = remember { mutableStateOf(1f) } // Progress starts at full (1.0)
+    val remainingTime = remember { mutableStateOf(60) }
+    val progress = remember { mutableStateOf(1f) }
 
     LaunchedEffect(Unit) {
         while (remainingTime.value > 0) {
-            delay(1000L) // Wait for 1 second
+            delay(1000L)
             remainingTime.value -= 1
             progress.value = remainingTime.value / 60.toFloat()
         }

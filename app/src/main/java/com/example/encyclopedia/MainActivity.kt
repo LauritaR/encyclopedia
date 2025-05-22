@@ -6,6 +6,10 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
+import com.example.encyclopedia.workers.ReminderWorker
+import java.util.concurrent.TimeUnit
 
 
 class MainActivity : ComponentActivity() {
@@ -13,6 +17,8 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        scheduleReminder()
         setContent {
             val windowClass = calculateWindowSizeClass(this)
 
@@ -20,5 +26,12 @@ class MainActivity : ComponentActivity() {
                 appContext = applicationContext)
             }
         }
+        private fun scheduleReminder(){
+            val workRequest = OneTimeWorkRequestBuilder<ReminderWorker>()
+                .setInitialDelay(10, TimeUnit.SECONDS)
+                .build()
+
+            WorkManager.getInstance(this).enqueue(workRequest)
     }
+}
 

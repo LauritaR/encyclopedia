@@ -20,17 +20,23 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.example.encyclopedia.presentation.theme.Accent10
 import com.example.encyclopedia.presentation.theme.Secondary30
+import com.example.encyclopedia.presentation.viewmodel.UserViewModel
 
 
 @Composable
 
 fun ResultScreen(score:Int,
                  totalQuestions:Int,
-               onNavigateToHome:()->Unit)
+                    onNavigateToHome:()->Unit,
+                 onNavigateToUserResults:()-> Unit,
+                 userViewModel: UserViewModel)
 {
+    val context = LocalContext.current
+    val loggedInUserId = userViewModel.loggedInUserId.value
     Column(
         modifier = Modifier
             .fillMaxSize(),
@@ -75,6 +81,20 @@ fun ResultScreen(score:Int,
                             containerColor = Accent10
                         )) {
                         Text("Back to Home")
+                    }
+                }
+                if (loggedInUserId != null) {
+                    Spacer(modifier = Modifier.height(12.dp))
+                    Row {
+                        Button(
+                            onClick = onNavigateToUserResults,
+                            colors = ButtonDefaults.buttonColors(
+                                contentColor = Secondary30,
+                                containerColor = Accent10
+                            )
+                        ) {
+                            Text("View My Past Results")
+                        }
                     }
                 }
 

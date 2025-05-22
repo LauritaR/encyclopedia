@@ -28,17 +28,20 @@ import com.example.encyclopedia.presentation.components.LinearTimeProgress
 import com.example.encyclopedia.presentation.components.NavigationSection
 import com.example.encyclopedia.presentation.components.QuestionCard
 import com.example.encyclopedia.presentation.viewmodel.QuizViewModel
+import com.example.encyclopedia.presentation.viewmodel.UserViewModel
 
 @Composable
 fun QuizScreen(modifier: Modifier=Modifier,
                viewModel: QuizViewModel,
                category:String,
-               navController: NavController
+               navController: NavController,
+               userViewModel: UserViewModel
 ) {
 
     LaunchedEffect(category) {
 
         viewModel.loadQuestions(category)
+        viewModel.resetCurrentQuestionIndex()
     }
     val questions = viewModel.questionsFlow.collectAsState(initial = emptyList())
     val currentQuestionIndex = viewModel.currentQuestionIndexFlow.collectAsState(initial = 0)
@@ -54,6 +57,7 @@ fun QuizScreen(modifier: Modifier=Modifier,
     val currentQuestionId = question.id
 
     val selectedOption = selectedOptions.value[currentQuestionId] ?: 0
+    val startTime = remember { System.currentTimeMillis() }
 
     Row(modifier = modifier.fillMaxSize()) {
         Column(
@@ -91,8 +95,14 @@ fun QuizScreen(modifier: Modifier=Modifier,
                 onNext = { viewModel.goToNextQuestion() },
                 isLastQuestion = currentQuestionIndex.value == questions.value.size - 1,
                 onSubmit = {
+                    val totalTime = System.currentTimeMillis() - startTime
                     viewModel.calculateScore()
-
+                    userViewModel.saveQuizResult(
+                        score = score.value,
+                        category = category,
+                        duration = totalTime,
+                        totalQuestions = questions.value.size,
+                    )
                     val scoreString = score.value.toString()
                     val totalQuestionsString = questions.value.size.toString()
 

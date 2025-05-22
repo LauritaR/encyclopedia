@@ -8,11 +8,15 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-@Database(entities = [Question::class, Answer::class], version = 1)
+@Database(entities = [Question::class, Answer::class, User::class, QuizResult::class],
+    version = 5)
+
 abstract class QuizDatabase: RoomDatabase() {
 
     abstract fun questionDao(): QuestionDao
     abstract fun answerDao(): AnswerDao
+    abstract fun userDao(): UserDao
+    abstract fun quizResultDao(): QuizResultDao
 
     companion object {
         @Volatile

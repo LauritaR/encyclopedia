@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.encyclopedia.data.local.Question
+import com.example.encyclopedia.presentation.theme.Accent10
 import com.example.encyclopedia.presentation.theme.Main60
 
 
@@ -24,7 +25,9 @@ fun QuestionCard(question: Question, onAnswerSelected:(Int)->Unit, selectedOptio
         colors = CardDefaults.cardColors(containerColor = Main60)
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
-            Text(text = question.questionText, style = MaterialTheme.typography.bodyLarge)
+            Text(text = question.questionText,
+                style = MaterialTheme.typography.bodyLarge,
+                color = Accent10)
             Spacer(modifier = Modifier.height(16.dp))
             val options = listOf(
                 question.option1,

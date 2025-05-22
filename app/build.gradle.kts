@@ -53,6 +53,9 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.media3.common.ktx)
+    implementation(libs.androidx.material3.lint)
+    implementation(libs.androidx.tv.material)
+    implementation(libs.androidx.ui.test.android)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -79,5 +82,17 @@ dependencies {
     ksp("androidx.room:room-compiler:2.5.0")
     implementation("androidx.room:room-ktx:2.5.0")
     implementation("androidx.work:work-runtime-ktx:2.8.1")
+
+    implementation ("androidx.datastore:datastore-preferences:1.0.0")
+    // Kotlin DSL
+    implementation("androidx.compose.material:material-icons-extended")
+
+// Groovy
+    implementation ("androidx.compose.material:material-icons-extended")
+
+    implementation ("com.airbnb.android:lottie-compose:6.1.0")
+
+
+
 
 }
